@@ -1,0 +1,16 @@
+.form {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.search {
+  padding: 12px;
+  border-radius: 28px;
+  border: none;
+  max-width: 400px;
+  width: 100%;
+  background: linear-gradient(0deg, rgba(208, 188, 255, 0.11), rgba(208, 188, 255, 0.11)), #1C1B1F;;
+}

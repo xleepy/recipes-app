@@ -1,0 +1,49 @@
+.card {
+  width: 100%;
+  height: 100%;
+  max-width: 360px;
+  max-height: 500px;
+  border-radius: 12px;
+  overflow: auto;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border: 1px solid #49454F;
+  cursor: pointer;
+  transition: all cubic-bezier(0.4, 0, 0.2, 1) 300ms;
+}
+
+.card:hover {
+  background: #49454F;
+}
+
+.card .image {
+  overflow: clip;
+  object-fit: cover;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.card .detail {
+  text-align: left;
+  padding: 1rem;
+}
+
+.card .detail .title {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.card .detail p {
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+
+
+.card .detail .info {
+  gap: 0.5rem;
+  display: flex;
+}
