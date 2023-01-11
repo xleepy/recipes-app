@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card tests should render component 1`] = `
+<DocumentFragment>
+  <div
+    class="card"
+  >
+    <div
+      class="detail"
+    >
+      <h2
+        class="title"
+      >
+        test
+      </h2>
+    </div>
+  </div>
+</DocumentFragment>
+`;

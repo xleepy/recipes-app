@@ -6,7 +6,7 @@ type ImageInfo = {
   height?: string;
 };
 
-type ImageModel = "THUMBNAIL" | "SMALL" | "REGULAR" | "LARGE";
+type ImageModel = 'THUMBNAIL' | 'SMALL' | 'REGULAR' | 'LARGE';
 
 type InlineModel = Record<ImageModel, ImageInfo>;
 
@@ -33,6 +33,7 @@ type Digest = {
 };
 
 export type Recipe = {
+  id?: number;
   uri?: string;
   label?: string;
   image?: string;

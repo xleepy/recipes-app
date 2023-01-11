@@ -1,3 +1,4 @@
+import { h } from 'preact';
 import { Recipe } from '../api';
 import styles from './card.module.css';
 
@@ -16,7 +17,7 @@ const Info = ({ info, label }: { info: string | string[]; label: string }) => {
 };
 
 export const Card = ({ recipe }: Props) => {
-  const { image, label, dishType, dietLabels, ...rest } = recipe;
+  const { image, label, dishType, dietLabels } = recipe;
 
   const canRenderDishType = dishType && dishType.length > 0;
   const canRenderDietLabel = dietLabels && dietLabels.length > 0;

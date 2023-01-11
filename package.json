@@ -2,19 +2,35 @@
   "name": "recipes-app",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build:gh": "tsc && vite build --base=/recipes-app",
+    "preview": "vite preview",
+    "format": "eslint --fix && prettier --write ./src",
+    "test": "jest ./src"
   },
   "dependencies": {
     "preact": "^10.11.3",
     "preact-router": "^4.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-transform-react-jsx": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.18.6",
     "@preact/preset-vite": "^2.4.0",
     "@testing-library/preact": "^3.2.2",
+    "@types/jest": "^29.2.5",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
+    "babel-jest": "^29.3.1",
+    "eslint": "^8.31.0",
+    "eslint-config-preact": "^1.3.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest-environment-jsdom": "^29.3.1",
+    "preact-render-to-string": "^5.2.6",
     "ts-jest": "^29.0.3",
     "typescript": "^4.9.3",
     "vite": "^4.0.0"

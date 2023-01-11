@@ -3,7 +3,8 @@ import { useSelectionContext } from '../app-context';
 
 type Props = RoutableProps;
 
-export const Detail = (props: Props) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const Detail = (_: Props) => {
   const { recipe } = useSelectionContext();
   return (
     <div>
