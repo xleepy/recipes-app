@@ -1,5 +1,7 @@
 // types from https://developer.edamam.com/edamam-docs-recipe-api
 
+console.log('env key', import.meta.env.VITE_APP_ID);
+
 const fetchData = (path: string, options?: RequestInit) => {
   return fetch(path, {
     ...options,
