@@ -1,8 +1,7 @@
-import { Recipe } from '../api';
 import styles from './card.module.css';
 
 type Props = {
-  recipe: Recipe;
+  recipe: any;
 };
 
 // TODO: improve info
@@ -21,21 +20,5 @@ export const Card = ({ recipe }: Props) => {
   const canRenderDishType = dishType && dishType.length > 0;
   const canRenderDietLabel = dietLabels && dietLabels.length > 0;
 
-  return (
-    <div className={styles.card}>
-      {image && (
-        <img
-          className={styles.image}
-          src={image}
-          alt="recipe image"
-          height={200}
-        />
-      )}
-      <div className={styles.detail}>
-        <h2 className={styles.title}>{label}</h2>
-        {canRenderDishType && <Info label="Dish type" info={dishType} />}
-        {canRenderDietLabel && <Info label="Diet label" info={dietLabels} />}
-      </div>
-    </div>
-  );
+  return <div className={styles.card}></div>;
 };

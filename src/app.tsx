@@ -1,15 +1,12 @@
 import Router from 'preact-router';
-import { Detail } from './components/detail';
-import { Home } from './components/home';
-import { AppProvider } from './app-context';
+import { Detail } from './pages/detail';
+import { Home } from './pages/home';
 
 export function App() {
   return (
-    <AppProvider>
-      <Router>
-        <Home path={`${import.meta.env.BASE_URL}`} />
-        <Detail path={`${import.meta.env.BASE_URL}detail/:name`} />
-      </Router>
-    </AppProvider>
+    <Router>
+      <Home path={`${import.meta.env.BASE_URL}`} />
+      <Detail path={`${import.meta.env.BASE_URL}/detail/:name`} />
+    </Router>
   );
 }

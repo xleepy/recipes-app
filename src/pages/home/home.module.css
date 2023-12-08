@@ -5,6 +5,7 @@
 
 .card-container {
   width: 100%;
+  overflow: auto;
   display: grid;
   grid-template-columns: 100%;  
   grid-template-rows: auto;
