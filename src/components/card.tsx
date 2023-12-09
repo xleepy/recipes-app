@@ -11,7 +11,7 @@ export const Card = ({ id, image, title }: Props) => {
   return (
     <div
       onClick={() => {
-        route(`/detail/${id}`);
+        route(`${import.meta.env.BASE_URL}/detail/${id}`);
       }}
       className={styles.card}
     >
