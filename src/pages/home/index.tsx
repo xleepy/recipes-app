@@ -15,7 +15,10 @@ export const Home = (props: RouteProps) => {
   const api = useRecipesApi();
 
   const searchForRecipes = useDebounce(
-    (query) => {
+    (query: string) => {
+      if (query.length === 0) {
+        return;
+      }
       api.searchRecipes({ query, number: 100 }).then(({ results }) => {
         setRecipes(Array.from(results));
       });
