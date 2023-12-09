@@ -7,6 +7,9 @@
 }
 
 .search {
+  top: 0.5rem;
+  z-index: 10;
+  position: sticky;
   padding: 12px;
   border-radius: 28px;
   border: none;

@@ -1,7 +1,7 @@
 import styles from './search.module.css';
 
 type SearchProps = {
-  value: string;
+  value?: string;
   onValueChange: (value: string) => void;
 };
 

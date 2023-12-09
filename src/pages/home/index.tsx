@@ -1,31 +1,35 @@
 import { RoutableProps } from 'preact-router';
-import { useEffect, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import { Search } from '../../components/search';
-import { fetchRecipes, Recipe } from '../../api';
 import styles from './home.module.css';
+import { useDebounce } from '../../hooks';
+import { Card } from '../../components/card';
+import { useRecipesApi } from '../../providers/recipes-api-provider';
+import { SearchRecipes200ResponseResultsInner } from '../../api';
 
 export const Home = (props: RoutableProps) => {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [query, setQuery] = useState('pasta');
+  const [recipes, setRecipes] = useState<
+    SearchRecipes200ResponseResultsInner[]
+  >([]);
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      fetchRecipes(query).then((results) => setRecipes(results as any));
-    }, 300);
+  const api = useRecipesApi();
 
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [query]);
-
-  console.log(recipes);
+  const searchForRecipes = useDebounce(
+    (query) => {
+      api.searchRecipes({ query, number: 100 }).then(({ results }) => {
+        setRecipes(Array.from(results));
+      });
+    },
+    200,
+    [api]
+  );
 
   return (
     <div className={styles.homeContainer}>
-      <Search value={query} onValueChange={setQuery} />
+      <Search onValueChange={searchForRecipes} />
       <ul className={styles.cardContainer}>
-        {recipes.map((recipe, idx) => {
-          return <li key={idx}>{recipe.title}</li>;
+        {recipes.map(({ id, image, title }) => {
+          return <Card key={id} id={id} image={image} title={title} />;
         })}
       </ul>
     </div>

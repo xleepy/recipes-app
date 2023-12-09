@@ -5,15 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "build:gh": "tsc && vite build --base=/recipes-app",
-    "preview": "vite preview"
+    "build": "npm run generate-api && tsc && vite build",
+    "build:gh": "npm run generate-api && tsc && vite build --base=/recipes-app",
+    "preview": "vite preview",
+    "generate-api": "openapi-generator-cli generate -i https://spoonacular.com/application/frontend/downloads/spoonacular-openapi-3.json -g typescript-fetch -o ./src/api"
   },
   "dependencies": {
     "preact": "^10.19.3",
     "preact-router": "^4.1.2"
   },
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.7.0",
     "@preact/preset-vite": "^2.7.0",
     "@testing-library/preact": "^3.2.3",
     "ts-jest": "^29.1.1",

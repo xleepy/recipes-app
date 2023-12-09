@@ -1,24 +1,22 @@
 import styles from './card.module.css';
+import { route, useRouter } from 'preact-router';
 
 type Props = {
-  recipe: any;
+  id: number;
+  image: string;
+  title: string;
 };
 
-// TODO: improve info
-const Info = ({ info, label }: { info: string | string[]; label: string }) => {
+export const Card = ({ id, image, title }: Props) => {
   return (
-    <div className={styles.info}>
-      <p>{`${label}:`}</p>
-      {Array.isArray(info) ? <p>{info.join(',')}</p> : <p>{info}</p>}
+    <div
+      onClick={() => {
+        route(`/detail/${id}`);
+      }}
+      className={styles.card}
+    >
+      <img loading="lazy" className={styles.image} src={image} />
+      <p>{title}</p>
     </div>
   );
-};
-
-export const Card = ({ recipe }: Props) => {
-  const { image, label, dishType, dietLabels, ...rest } = recipe;
-
-  const canRenderDishType = dishType && dishType.length > 0;
-  const canRenderDietLabel = dietLabels && dietLabels.length > 0;
-
-  return <div className={styles.card}></div>;
 };
