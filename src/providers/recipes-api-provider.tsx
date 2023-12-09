@@ -1,5 +1,6 @@
 import { createContext, ComponentChildren } from 'preact';
-import { Configuration, RecipesApi } from '../api';
+import { RecipesApi } from '../api/apis/RecipesApi';
+import { Configuration } from '../api/runtime';
 import { useContext, useMemo } from 'preact/hooks';
 
 type RecipesProviderContextValue = RecipesApi | null;

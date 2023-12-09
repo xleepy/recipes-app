@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run generate-api && tsc && vite build",
-    "build:gh": "npm run generate-api && tsc && vite build --base=/recipes-app",
+    "build": "vite build",
+    "build:gh": "npm run generate-api && vite build --base=/recipes-app",
     "preview": "vite preview",
     "generate-api": "openapi-generator-cli generate -i https://spoonacular.com/application/frontend/downloads/spoonacular-openapi-3.json -g typescript-fetch -o ./src/api"
   },
