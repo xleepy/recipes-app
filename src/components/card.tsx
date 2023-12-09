@@ -1,5 +1,5 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './card.module.css';
-import { route, useRouter } from 'preact-router';
 
 type Props = {
   id: number;
@@ -8,10 +8,11 @@ type Props = {
 };
 
 export const Card = ({ id, image, title }: Props) => {
+  const navigate = useNavigate();
   return (
     <div
       onClick={() => {
-        route(`${import.meta.env.BASE_URL}/detail/${id}`);
+        navigate(`/detail/${id}`);
       }}
       className={styles.card}
     >

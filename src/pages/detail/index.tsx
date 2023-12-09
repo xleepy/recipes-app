@@ -1,12 +1,11 @@
-import { RoutableProps } from 'preact-router';
 import { useRecipesApi } from '../../providers/recipes-api-provider';
 import { useEffect, useState } from 'preact/hooks';
 import { GetRecipeInformation200Response } from '../../api';
 import styles from './detail.module.css';
+import { RouteProps, useParams } from 'react-router-dom';
 
-type Props = RoutableProps & { id?: number };
-
-export const Detail = ({ id }: Props) => {
+export const Detail = (props: RouteProps) => {
+  const { id } = useParams<{ id: string }>();
   const api = useRecipesApi();
   const [detail, setDetail] = useState<GetRecipeInformation200Response>();
 
@@ -16,7 +15,7 @@ export const Detail = ({ id }: Props) => {
     }
     const abortSignal = new AbortController();
     api
-      .getRecipeInformation({ id }, { signal: abortSignal.signal })
+      .getRecipeInformation({ id: Number(id) }, { signal: abortSignal.signal })
       .then(setDetail);
     return () => {
       abortSignal.abort();

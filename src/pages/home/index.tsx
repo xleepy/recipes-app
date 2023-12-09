@@ -1,4 +1,3 @@
-import { RoutableProps } from 'preact-router';
 import { useState } from 'preact/hooks';
 import { Search } from '../../components/search';
 import styles from './home.module.css';
@@ -6,8 +5,9 @@ import { useDebounce } from '../../hooks';
 import { Card } from '../../components/card';
 import { useRecipesApi } from '../../providers/recipes-api-provider';
 import { SearchRecipes200ResponseResultsInner } from '../../api';
+import { RouteProps } from 'react-router-dom';
 
-export const Home = (props: RoutableProps) => {
+export const Home = (props: RouteProps) => {
   const [recipes, setRecipes] = useState<
     SearchRecipes200ResponseResultsInner[]
   >([]);
