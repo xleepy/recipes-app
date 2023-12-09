@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import { Search } from '../../components/search';
 import styles from './home.module.css';
 import { useDebounce } from '../../hooks';
@@ -7,29 +7,40 @@ import { useRecipesApi } from '../../providers/recipes-api-provider';
 import { SearchRecipes200ResponseResultsInner } from '../../api';
 import { RouteProps } from 'react-router-dom';
 
+const SEARCH_KEY = 'cached-search-key';
+
 export const Home = (props: RouteProps) => {
+  const [query, setQuery] = useState<string>(() => {
+    return sessionStorage.getItem(SEARCH_KEY) ?? 'pasta';
+  });
   const [recipes, setRecipes] = useState<
     SearchRecipes200ResponseResultsInner[]
   >([]);
 
   const api = useRecipesApi();
 
-  const searchForRecipes = useDebounce(
-    (query: string) => {
-      if (query.length === 0) {
-        return;
-      }
+  useEffect(() => {
+    if (query.length === 0) {
+      return;
+    }
+    const timeoutId = setTimeout(() => {
       api.searchRecipes({ query, number: 100 }).then(({ results }) => {
         setRecipes(Array.from(results));
       });
-    },
-    500,
-    [api]
-  );
+    }, 500);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [query, api]);
+
+  const searchForRecipes = (query) => {
+    setQuery(query);
+    sessionStorage.setItem(SEARCH_KEY, query);
+  };
 
   return (
     <div className={styles.homeContainer}>
-      <Search onValueChange={searchForRecipes} />
+      <Search value={query} onValueChange={searchForRecipes} />
       <ul className={styles.cardContainer}>
         {recipes.map(({ id, image, title }) => {
           return <Card key={id} id={id} image={image} title={title} />;
