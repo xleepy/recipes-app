@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'preact/hooks';
 import { Search } from '../../components/search';
 import styles from './home.module.css';
-import { useDebounce } from '../../hooks';
 import { Card } from '../../components/card';
 import { useRecipesApi } from '../../providers/recipes-api-provider';
 import { SearchRecipes200ResponseResultsInner } from '../../api';
@@ -33,14 +32,14 @@ export const Home = (props: RouteProps) => {
     };
   }, [query, api]);
 
-  const searchForRecipes = (query) => {
+  const queryChange = (query) => {
     setQuery(query);
     sessionStorage.setItem(SEARCH_KEY, query);
   };
 
   return (
     <div className={styles.homeContainer}>
-      <Search value={query} onValueChange={searchForRecipes} />
+      <Search value={query} onValueChange={queryChange} />
       <ul className={styles.cardContainer}>
         {recipes.map(({ id, image, title }) => {
           return <Card key={id} id={id} image={image} title={title} />;

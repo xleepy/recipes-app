@@ -11,6 +11,7 @@
     "generate-api": "openapi-generator-cli generate -i https://spoonacular.com/application/frontend/downloads/spoonacular-openapi-3.json -g typescript-fetch -o ./src/api"
   },
   "dependencies": {
+    "dompurify": "^3.0.6",
     "preact": "^10.19.3",
     "react-router-dom": "^6.20.1"
   },
@@ -18,6 +19,7 @@
     "@openapitools/openapi-generator-cli": "^2.7.0",
     "@preact/preset-vite": "^2.7.0",
     "@testing-library/preact": "^3.2.3",
+    "@types/dompurify": "^3.0.5",
     "ts-jest": "^29.1.1",
     "typescript": "^5.3.3",
     "vite": "^5.0.7"

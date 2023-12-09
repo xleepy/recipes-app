@@ -3,6 +3,7 @@ import { useEffect, useState } from 'preact/hooks';
 import { GetRecipeInformation200Response } from '../../api';
 import styles from './detail.module.css';
 import { RouteProps, useParams } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 
 export const Detail = (props: RouteProps) => {
   const { id } = useParams<{ id: string }>();
@@ -30,8 +31,14 @@ export const Detail = (props: RouteProps) => {
     <div className={styles.detail}>
       <img src={detail.image} />
       {/* TODO fix dangerously set html */}
-      <div dangerouslySetInnerHTML={{ __html: detail.summary }} />
-      <div dangerouslySetInnerHTML={{ __html: detail.instructions }} />
+      <div
+        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(detail.summary) }}
+      />
+      <div
+        dangerouslySetInnerHTML={{
+          __html: DOMPurify.sanitize(detail.instructions),
+        }}
+      />
     </div>
   );
 };
