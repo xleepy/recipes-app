@@ -20,7 +20,7 @@ export const Home = (props: RouteProps) => {
         setRecipes(Array.from(results));
       });
     },
-    200,
+    500,
     [api]
   );
 
