@@ -4,11 +4,10 @@ import styles from './home.module.css';
 import { Card } from '../../components/card';
 import { useRecipesApi } from '../../providers/recipes-api-provider';
 import { SearchRecipes200ResponseResultsInner } from '../../api';
-import { RouteProps } from 'react-router-dom';
 
 const SEARCH_KEY = 'cached-search-key';
 
-export const Home = (props: RouteProps) => {
+export const Home = () => {
   const [query, setQuery] = useState<string>(() => {
     return sessionStorage.getItem(SEARCH_KEY) ?? 'pasta';
   });
@@ -23,9 +22,11 @@ export const Home = (props: RouteProps) => {
       return;
     }
     const timeoutId = setTimeout(() => {
-      api.searchRecipes({ query, number: 100 }).then(({ results }) => {
-        setRecipes(Array.from(results));
-      });
+      api
+        .searchRecipes({ query, number: 100, instructionsRequired: true })
+        .then(({ results }) => {
+          setRecipes(Array.from(results));
+        });
     }, 500);
     return () => {
       clearTimeout(timeoutId);
@@ -38,7 +39,7 @@ export const Home = (props: RouteProps) => {
   };
 
   return (
-    <div className={styles.homeContainer}>
+    <div>
       <Search value={query} onValueChange={queryChange} />
       <ul className={styles.cardContainer}>
         {recipes.map(({ id, image, title }) => {

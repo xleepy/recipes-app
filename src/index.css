@@ -26,9 +26,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
@@ -79,7 +76,6 @@ p {
 
 
 #app {
-  width: 100%;
   max-width: 1280px;
   margin: 0 auto;
   padding: 1rem;

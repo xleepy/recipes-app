@@ -2,13 +2,14 @@ import { useRecipesApi } from '../../providers/recipes-api-provider';
 import { useEffect, useState } from 'preact/hooks';
 import { GetRecipeInformation200Response } from '../../api';
 import styles from './detail.module.css';
-import { RouteProps, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 
-export const Detail = (props: RouteProps) => {
+const Detail = () => {
   const { id } = useParams<{ id: string }>();
   const api = useRecipesApi();
   const [detail, setDetail] = useState<GetRecipeInformation200Response>();
+  const [isLoading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (!id) {
@@ -17,16 +18,23 @@ export const Detail = (props: RouteProps) => {
     const abortSignal = new AbortController();
     api
       .getRecipeInformation({ id: Number(id) }, { signal: abortSignal.signal })
-      .then(setDetail);
+      .then(setDetail)
+      .finally(() => {
+        setLoading(false);
+      });
     return () => {
       abortSignal.abort();
     };
   }, [api, id]);
 
-  if (!detail) {
+  if (isLoading) {
     return <p>Loading...</p>;
   }
-  console.log('detail', detail);
+
+  if (!detail) {
+    return <p>Failed to fetch</p>;
+  }
+
   return (
     <div className={styles.detail}>
       <img src={detail.image} />
@@ -42,3 +50,5 @@ export const Detail = (props: RouteProps) => {
     </div>
   );
 };
+
+export default Detail;
