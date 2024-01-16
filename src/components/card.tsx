@@ -11,6 +11,7 @@ export const Card = ({ id, image, title }: Props) => {
   const navigate = useNavigate();
   return (
     <div
+      data-testid="card"
       onClick={() => {
         navigate(`/detail/${id}`);
       }}

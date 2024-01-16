@@ -8,6 +8,7 @@ type SearchProps = {
 export const Search = ({ value, onValueChange }: SearchProps) => {
   return (
     <input
+      data-testid="search"
       value={value}
       onChange={(e) => onValueChange(e.currentTarget.value)}
       className={styles.search}

@@ -1,0 +1,20 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Detail tests > should render detail 1`] = `
+<DocumentFragment>
+  <div
+    class="_detail_21518f"
+    data-testid="detail"
+  >
+    <img
+      src="none"
+    />
+    <div>
+      test
+    </div>
+    <div>
+      test
+    </div>
+  </div>
+</DocumentFragment>
+`;

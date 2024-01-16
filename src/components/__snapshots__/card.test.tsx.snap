@@ -1,0 +1,19 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Card tests > should render card 1`] = `
+<DocumentFragment>
+  <div
+    class="_card_a4e602"
+    data-testid="card"
+  >
+    <img
+      class="_image_a4e602"
+      loading="lazy"
+      src=""
+    />
+    <p>
+      test
+    </p>
+  </div>
+</DocumentFragment>
+`;

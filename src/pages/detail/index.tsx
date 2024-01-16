@@ -36,7 +36,7 @@ const Detail = () => {
   }
 
   return (
-    <div className={styles.detail}>
+    <div data-testid="detail" className={styles.detail}>
       <img src={detail.image} />
       {/* TODO fix dangerously set html */}
       <div

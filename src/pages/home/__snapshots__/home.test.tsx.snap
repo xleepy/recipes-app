@@ -1,0 +1,31 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Home tests > should render home 1`] = `
+<DocumentFragment>
+  <div>
+    <input
+      class="_search_892a02"
+      data-testid="search"
+      placeholder="Enter query"
+      type="text"
+    />
+    <ul
+      class="_card-container_13d6a5"
+    >
+      <div
+        class="_card_a4e602"
+        data-testid="card"
+      >
+        <img
+          class="_image_a4e602"
+          loading="lazy"
+          src="none"
+        />
+        <p>
+          test
+        </p>
+      </div>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
