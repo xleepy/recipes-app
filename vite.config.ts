@@ -26,6 +26,9 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       exclude: ['src/api', 'src/vite-env.d.ts'],
+      thresholds: {
+        statements: 85,
+      },
     },
   },
 });
