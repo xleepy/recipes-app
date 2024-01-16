@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:gh": "npm run generate-api && vite build --base=/recipes-app",
+    "build:gh": "vite build --base=/recipes-app",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "preview": "vite preview",
