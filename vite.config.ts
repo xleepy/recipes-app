@@ -3,6 +3,7 @@
 
 import { defineConfig } from 'vite';
 import preact from '@preact/preset-vite';
+import { configDefaults } from 'vitest/config';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -22,5 +23,9 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './test/setup.ts',
     css: true,
+    coverage: {
+      provider: 'v8',
+      exclude: ['src/api', 'src/vite-env.d.ts'],
+    },
   },
 });
