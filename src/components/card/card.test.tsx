@@ -1,6 +1,6 @@
 import { render } from '@testing-library/preact';
 import { Card } from './card';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { BrowserRouter } from 'react-router-dom';
 
 describe('Card tests', () => {
