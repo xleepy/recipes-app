@@ -2,12 +2,12 @@ import { useRecipesApi } from '../../providers/recipes-api-provider';
 import styles from './detail.module.css';
 import { useParams } from 'react-router-dom';
 import DOMPurify from 'dompurify';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 const Detail = () => {
   const { id } = useParams<{ id: string }>();
   const api = useRecipesApi();
-  const { data: detail, isLoading } = useQuery({
+  const { data: detail, error } = useSuspenseQuery({
     queryKey: [id],
     queryFn: ({ queryKey, signal }) => {
       const [key] = queryKey;
@@ -15,12 +15,8 @@ const Detail = () => {
     },
   });
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
   if (!detail) {
-    return <p>Failed to fetch</p>;
+    return <p>{error}</p>;
   }
 
   return (
