@@ -13,7 +13,7 @@
   display: flex;
 }
 
-@media (min-width: 450px) {
+@media (width >= 450px) {
   .card-container {
     grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   }

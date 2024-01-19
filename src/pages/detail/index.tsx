@@ -1,8 +1,9 @@
 import { useRecipesApi } from '../../providers/recipes-api-provider';
 import styles from './detail.module.css';
 import { useParams } from 'react-router-dom';
-import DOMPurify from 'dompurify';
 import { useSuspenseQuery } from '@tanstack/react-query';
+import { Chip } from '../../components/chip';
+import DOMPurify from 'dompurify';
 
 const Detail = () => {
   const { id } = useParams<{ id: string }>();
@@ -19,18 +20,31 @@ const Detail = () => {
     return <p>{error}</p>;
   }
 
+  const { title, dishTypes, vegetarian, healthScore, summary } = detail;
+
+  console.log(detail);
+
   return (
-    <div data-testid="detail" className={styles.detail}>
-      <img src={detail.image} />
-      {/* TODO fix dangerously set html */}
-      <div
-        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(detail.summary) }}
-      />
-      <div
-        dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(detail.instructions),
-        }}
-      />
+    <div data-testid="detail" className={`${styles.detail} flex flex-wrap`}>
+      <div className="flex-1">
+        <img src={detail.image} />
+      </div>
+      <div className="flex-1 flex flex-column gap-s">
+        <h2>{title}</h2>
+        <div className={`flex flex-wrap flex-justify-center gap-s`}>
+          {dishTypes.map((type, idx) => (
+            <Chip name={type} key={idx} />
+          ))}
+        </div>
+        {vegetarian && <Chip name="vegetarian" />}
+        <div className="flex flex-wrap">
+          <p>{`Health score: ${healthScore}`}</p>
+        </div>
+        <p
+          className="text-left"
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(summary) }}
+        />
+      </div>
     </div>
   );
 };
