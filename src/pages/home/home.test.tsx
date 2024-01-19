@@ -4,6 +4,8 @@ import { Home } from '.';
 import { RecipesApiProvider } from '../../providers/recipes-api-provider';
 import { HashRouter } from 'react-router-dom';
 import { SearchRecipes200Response } from '../../api';
+import { SWRConfig } from 'swr';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const mockFn = vi.fn(() =>
   Promise.resolve({
@@ -37,14 +39,18 @@ vi.mock('../../providers/recipes-api-provider', async (importOriginal) => {
   };
 });
 
+const queryClient = new QueryClient();
+
 describe('Home tests', () => {
   const renderApp = () => {
     return render(
-      <RecipesApiProvider>
-        <HashRouter>
-          <Home />
-        </HashRouter>
-      </RecipesApiProvider>
+      <QueryClientProvider client={queryClient}>
+        <RecipesApiProvider>
+          <HashRouter>
+            <Home />
+          </HashRouter>
+        </RecipesApiProvider>
+      </QueryClientProvider>
     );
   };
   it('should render home', async () => {

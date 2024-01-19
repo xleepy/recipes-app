@@ -1,0 +1,12 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Search tests > should render search 1`] = `
+<DocumentFragment>
+  <input
+    class="_search_4d1a47"
+    data-testid="search"
+    placeholder="Enter query"
+    type="text"
+  />
+</DocumentFragment>
+`;

@@ -2,7 +2,7 @@ import styles from './search.module.css';
 
 type SearchProps = {
   value?: string;
-  onValueChange: (value: string) => void;
+  onValueChange: (event: Event) => void;
 };
 
 export const Search = ({ value, onValueChange }: SearchProps) => {
@@ -10,7 +10,7 @@ export const Search = ({ value, onValueChange }: SearchProps) => {
     <input
       data-testid="search"
       value={value}
-      onChange={(e) => onValueChange(e.currentTarget.value)}
+      onChange={onValueChange}
       className={styles.search}
       type="text"
       placeholder="Enter query"

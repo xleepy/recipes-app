@@ -3,6 +3,8 @@ import { describe, expect, it, vi } from 'vitest';
 import Detail from '.';
 import { GetRecipeInformation200Response } from '../../api';
 import { RecipesApiProvider } from '../../providers/recipes-api-provider';
+import { SWRConfig } from 'swr';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const mockFn = vi.fn(() =>
   Promise.resolve({
@@ -33,12 +35,16 @@ vi.mock('../../providers/recipes-api-provider', async (importOriginal) => {
   };
 });
 
+const queryClient = new QueryClient();
+
 describe('Detail tests', () => {
   it('should render detail', async () => {
     const { asFragment, queryByTestId } = render(
-      <RecipesApiProvider>
-        <Detail />
-      </RecipesApiProvider>
+      <QueryClientProvider client={queryClient}>
+        <RecipesApiProvider>
+          <Detail />
+        </RecipesApiProvider>
+      </QueryClientProvider>
     );
 
     await waitFor(() => {

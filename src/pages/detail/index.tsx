@@ -1,31 +1,19 @@
 import { useRecipesApi } from '../../providers/recipes-api-provider';
-import { useEffect, useState } from 'preact/hooks';
-import { GetRecipeInformation200Response } from '../../api';
 import styles from './detail.module.css';
 import { useParams } from 'react-router-dom';
 import DOMPurify from 'dompurify';
+import { useQuery } from '@tanstack/react-query';
 
 const Detail = () => {
   const { id } = useParams<{ id: string }>();
   const api = useRecipesApi();
-  const [detail, setDetail] = useState<GetRecipeInformation200Response>();
-  const [isLoading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    if (!id) {
-      return;
-    }
-    const abortSignal = new AbortController();
-    api
-      .getRecipeInformation({ id: Number(id) }, { signal: abortSignal.signal })
-      .then(setDetail)
-      .finally(() => {
-        setLoading(false);
-      });
-    return () => {
-      abortSignal.abort();
-    };
-  }, [api, id]);
+  const { data: detail, isLoading } = useQuery({
+    queryKey: [id],
+    queryFn: ({ queryKey, signal }) => {
+      const [key] = queryKey;
+      return api.getRecipeInformation({ id: Number(key) }, { signal });
+    },
+  });
 
   if (isLoading) {
     return <p>Loading...</p>;
