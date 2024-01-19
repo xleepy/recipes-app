@@ -11,7 +11,7 @@
     "coverage": "vitest run --coverage",
     "preview": "vite preview",
     "eslint:fix": "eslint --fix src/",
-    "eslint:verify": "eslint --verify src/",
+    "eslint:verify": "eslint src/",
     "generate-api": "openapi-generator-cli generate -i https://spoonacular.com/application/frontend/downloads/spoonacular-openapi-3.json -g typescript-fetch -o ./src/api"
   },
   "dependencies": {
