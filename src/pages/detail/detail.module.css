@@ -2,6 +2,11 @@
   gap: 1rem;
 }
 
+.left-side {
+  flex-basis: 100%;
+  width: 100%;
+}
+
 .image {
   aspect-ratio: 16/9;
   width: 100%;
@@ -10,3 +15,10 @@
   object-fit: cover;
 }
 
+
+@media (width >= 1024px) {
+  .left-side {
+    flex-basis: auto;
+    width: auto;
+  }
+}
