@@ -3,6 +3,7 @@ import styles from './detail.module.css';
 import { useParams } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 import { useSuspenseQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
 const Detail = () => {
   const { id } = useParams<{ id: string }>();
