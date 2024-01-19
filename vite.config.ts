@@ -22,6 +22,12 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './test/setup.ts',
     css: true,
+    alias: {
+      react: 'preact/compat',
+      'react-dom/test-utils': 'preact/test-utils',
+      'react-dom': 'preact/compat', // Must be below test-utils
+      'react/jsx-runtime': 'preact/jsx-runtime',
+    },
     coverage: {
       provider: 'v8',
       exclude: ['src/api', 'src/vite-env.d.ts'],
