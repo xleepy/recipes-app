@@ -9,15 +9,19 @@ type Props = {
 
 export const Card = ({ id, image, title }: Props) => {
   const navigate = useNavigate();
+  const navigateToDetail = () => {
+    navigate(`/detail/${id}`);
+  };
   return (
     <div
       data-testid="card"
-      onClick={() => {
-        navigate(`/detail/${id}`);
-      }}
+      onClick={navigateToDetail}
+      onKeyPress={navigateToDetail}
       className={styles.card}
+      role="button"
+      tabIndex={0}
     >
-      <img loading="lazy" className={styles.image} src={image} />
+      <img loading="lazy" alt="preview" className={styles.image} src={image} />
       <p>{title}</p>
     </div>
   );
