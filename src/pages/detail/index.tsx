@@ -27,7 +27,7 @@ const Detail = () => {
   return (
     <div data-testid="detail" className={`${styles.detail} flex flex-wrap`}>
       <div className="flex-1">
-        <img src={detail.image} />
+        <img src={detail.image} alt="recipe image" />
       </div>
       <div className="flex-1 flex flex-column gap-s">
         <h2>{title}</h2>
