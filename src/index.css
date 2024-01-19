@@ -96,6 +96,10 @@ p {
   flex: 1;
 }
 
+.flex-0 {
+  flex: 0;
+}
+
 .flex-wrap {
   flex-wrap: wrap;
 }
