@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import { Search } from '../../components/search/search';
 import styles from './home.module.css';
 import { Card } from '../../components/card/card';
