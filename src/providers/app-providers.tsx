@@ -7,7 +7,13 @@ type AppProvidersProps = {
   children: ComponentChildren;
 };
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 0,
+    },
+  },
+});
 
 export const AppProviders = ({ children }: AppProvidersProps) => {
   return (
