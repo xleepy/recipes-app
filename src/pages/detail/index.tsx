@@ -5,6 +5,38 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { Chip } from '../../components/chip';
 import DOMPurify from 'dompurify';
 
+type Item = {
+  id: number;
+  image: string;
+  localizedName: string;
+  name: string;
+};
+
+type Step = {
+  number: number;
+  step: string;
+  ingredients: Item[];
+  equipment: Item[];
+};
+
+type AnalyzedInstruction = {
+  name: string;
+  steps: Step[];
+};
+
+const Steps = ({ steps, className }: { steps: Step[]; className: string }) => {
+  return (
+    <div className={`text-left  ${className}`}>
+      <h3>Steps</h3>
+      <ol>
+        {steps.map((step) => {
+          return <li key={step.number}>{step.step}</li>;
+        })}
+      </ol>
+    </div>
+  );
+};
+
 const Detail = () => {
   const { id } = useParams<{ id: string }>();
   const api = useRecipesApi();
@@ -20,14 +52,22 @@ const Detail = () => {
     return <p>{error}</p>;
   }
 
-  const { title, dishTypes, vegetarian, healthScore, summary } = detail;
+  const {
+    title,
+    dishTypes,
+    vegetarian,
+    healthScore,
+    summary,
+    analyzedInstructions,
+  } = detail;
 
-  console.log(detail);
+  const [{ steps }] = analyzedInstructions as AnalyzedInstruction[];
 
   return (
-    <div data-testid="detail" className={`${styles.detail} flex flex-wrap`}>
+    <div data-testid="detail" className={`gap-l flex flex-wrap`}>
       <div className={`${styles.leftSide}`}>
         <img className={styles.image} src={detail.image} alt="recipe" />
+        <Steps steps={steps} className={styles.stepsLarge} />
       </div>
       <div className="flex-1 flex flex-column gap-s">
         <h2>{title}</h2>
@@ -44,6 +84,7 @@ const Detail = () => {
           className="text-left"
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(summary) }}
         />
+        <Steps steps={steps} className={styles.stepsMin} />
       </div>
     </div>
   );

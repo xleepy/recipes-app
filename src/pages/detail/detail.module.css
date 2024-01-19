@@ -1,7 +1,3 @@
-.detail {
-  gap: 1rem;
-}
-
 .left-side {
   flex-basis: 100%;
   width: 100%;
@@ -16,9 +12,25 @@
 }
 
 
+.steps-large {
+  display: none;
+}
+
+.steps-min {
+  display: block;
+}
+
 @media (width >= 1024px) {
   .left-side {
     flex-basis: auto;
     width: auto;
+  }
+
+  .steps-min {
+    display: none;
+  }
+
+  .steps-large {
+    display: block;
   }
 }

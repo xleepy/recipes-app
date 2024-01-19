@@ -140,3 +140,7 @@ p {
 .gap-l {
   gap: 1rem;
 }
+
+ol {
+  padding-left: 1rem;
+}
