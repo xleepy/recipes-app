@@ -24,7 +24,7 @@ type AnalyzedInstruction = {
   steps: Step[];
 };
 
-const Steps = ({ steps, className }: { steps: Step[]; className: string }) => {
+const Steps = ({ steps, className }: { steps: Step[]; className?: string }) => {
   return (
     <div className={`text-left  ${className}`}>
       <h3>Steps</h3>
@@ -65,11 +65,8 @@ const Detail = () => {
 
   return (
     <div data-testid="detail" className={`gap-l flex flex-wrap`}>
-      <div className={`${styles.leftSide}`}>
-        <img className={styles.image} src={detail.image} alt="recipe" />
-        <Steps steps={steps} className={styles.stepsLarge} />
-      </div>
-      <div className="flex-1 flex flex-column gap-s">
+      <img className={styles.image} src={detail.image} alt="recipe" />
+      <div className="flex flex-1 flex-column gap-s">
         <h2>{title}</h2>
         <div className={`flex flex-wrap flex-justify-center gap-s`}>
           {dishTypes.map((type, idx) => (
@@ -84,8 +81,8 @@ const Detail = () => {
           className="text-left"
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(summary) }}
         />
-        <Steps steps={steps} className={styles.stepsMin} />
       </div>
+      <Steps steps={steps} />
     </div>
   );
 };
