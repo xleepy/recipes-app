@@ -25,7 +25,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
-      - run: npm run eslint:verify
+      - run: npm run check
       - run: npm run generate-api
       # - run: npm run coverage
       - run: npm run build:gh

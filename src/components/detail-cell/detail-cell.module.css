@@ -1,0 +1,12 @@
+.detail-cell {
+  max-width: 650px;
+  width: 100%;
+  flex: 1 0 100%;
+}
+
+
+@media (width >= 1050px) {
+  .detail-cell {
+    flex: 1 0 49%;
+  }
+}

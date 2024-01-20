@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { Chip } from '../../components/chip';
 import DOMPurify from 'dompurify';
+import { DetailCell } from '../../components/detail-cell';
 
 type Item = {
   id: number;
@@ -59,21 +60,29 @@ const Detail = () => {
     healthScore,
     summary,
     analyzedInstructions,
+    extendedIngredients,
   } = detail;
 
   const [{ steps }] = analyzedInstructions as AnalyzedInstruction[];
 
+  const ingredients = Array.from(extendedIngredients);
+
   return (
-    <div data-testid="detail" className={`gap-l flex flex-wrap`}>
-      <img className={styles.image} src={detail.image} alt="recipe" />
-      <div className="flex flex-1 flex-column gap-s">
+    <div
+      data-testid="detail"
+      className={`gap-l flex flex-wrap flex-justify-center`}
+    >
+      <DetailCell>
+        <img className={styles.image} src={detail.image} alt="recipe" />
+      </DetailCell>
+      <DetailCell className="flex flex-column gap-s">
         <h2>{title}</h2>
         <div className={`flex flex-wrap flex-justify-center gap-s`}>
           {dishTypes.map((type, idx) => (
             <Chip name={type} key={idx} />
           ))}
+          {vegetarian && <Chip name="vegetarian" />}
         </div>
-        {vegetarian && <Chip name="vegetarian" />}
         <div className="flex flex-wrap">
           <p>{`Health score: ${healthScore}`}</p>
         </div>
@@ -81,8 +90,18 @@ const Detail = () => {
           className="text-left"
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(summary) }}
         />
-      </div>
-      <Steps steps={steps} />
+      </DetailCell>
+      <DetailCell className="text-left">
+        <h3>Ingredients</h3>
+        <ul>
+          {ingredients.map((ingredient) => {
+            return <li key={ingredient.id}>{`${ingredient.original}`}</li>;
+          })}
+        </ul>
+      </DetailCell>
+      <DetailCell>
+        <Steps steps={steps} />
+      </DetailCell>
     </div>
   );
 };

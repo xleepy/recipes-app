@@ -13,7 +13,7 @@
     "stylelint": "stylelint ./src/**/*.css --fix",
     "format": "npm run eslint:fix && npm run stylelint",
     "eslint:fix": "eslint --fix src/",
-    "eslint:verify": "eslint src/",
+    "check": "eslint src/ && stylelint ./src/**/*.css",
     "generate-api": "openapi-generator-cli generate -i https://spoonacular.com/application/frontend/downloads/spoonacular-openapi-3.json -g typescript-fetch -o ./src/api"
   },
   "dependencies": {
