@@ -26,9 +26,10 @@ export const Home = () => {
 
   const queryChange = useDebounceCallback(
     (event: Event) => {
-      const value = (event.target as HTMLInputElement).value;
-      if (value.trim().length) {
+      const value = (event.target as HTMLInputElement).value.trim();
+      if (value.length) {
         setSearch(value);
+        sessionStorage.setItem(SEARCH_KEY, value);
       }
     },
     500,

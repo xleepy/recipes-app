@@ -59,7 +59,7 @@ const Detail = () => {
     vegetarian,
     healthScore,
     summary,
-    analyzedInstructions,
+    analyzedInstructions = [],
     extendedIngredients,
   } = detail;
 
@@ -94,8 +94,12 @@ const Detail = () => {
       <DetailCell className="text-left">
         <h3>Ingredients</h3>
         <ul>
-          {ingredients.map((ingredient) => {
-            return <li key={ingredient.id}>{`${ingredient.original}`}</li>;
+          {ingredients.map((ingredient, idx) => {
+            return (
+              <li
+                key={`${ingredient.id}-${idx}`}
+              >{`${ingredient.original}`}</li>
+            );
           })}
         </ul>
       </DetailCell>
