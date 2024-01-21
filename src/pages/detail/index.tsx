@@ -5,6 +5,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { Chip } from '../../components/chip';
 import DOMPurify from 'dompurify';
 import { DetailCell } from '../../components/detail-cell';
+import { List } from '../../components/list';
 
 type Item = {
   id: number;
@@ -23,19 +24,6 @@ type Step = {
 type AnalyzedInstruction = {
   name: string;
   steps: Step[];
-};
-
-const Steps = ({ steps, className }: { steps: Step[]; className?: string }) => {
-  return (
-    <div className={`text-left  ${className}`}>
-      <h3>Steps</h3>
-      <ol>
-        {steps.map((step) => {
-          return <li key={step.number}>{step.step}</li>;
-        })}
-      </ol>
-    </div>
-  );
 };
 
 const Detail = () => {
@@ -92,8 +80,7 @@ const Detail = () => {
         />
       </DetailCell>
       <DetailCell className="text-left">
-        <h3>Ingredients</h3>
-        <ul>
+        <List title="Ingredients">
           {ingredients.map((ingredient, idx) => {
             return (
               <li
@@ -101,10 +88,14 @@ const Detail = () => {
               >{`${ingredient.original}`}</li>
             );
           })}
-        </ul>
+        </List>
       </DetailCell>
       <DetailCell>
-        <Steps steps={steps} />
+        <List as="ol" title="Steps">
+          {steps.map((step) => {
+            return <li key={step.number}>{step.step}</li>;
+          })}
+        </List>
       </DetailCell>
     </div>
   );

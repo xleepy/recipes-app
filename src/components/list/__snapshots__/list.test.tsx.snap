@@ -1,0 +1,35 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`List tests > should render as ordered list 1`] = `
+<DocumentFragment>
+  <div
+    class="text-left "
+  >
+    <h3>
+      Lorem ipsum
+    </h3>
+    <ol>
+      <li>
+        test
+      </li>
+    </ol>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`List tests > should render as unordered list 1`] = `
+<DocumentFragment>
+  <div
+    class="text-left "
+  >
+    <h3>
+      Lorem ipsum
+    </h3>
+    <ul>
+      <li>
+        test
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;

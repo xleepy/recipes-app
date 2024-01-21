@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Chip tests > should render chip element 1`] = `
+<DocumentFragment>
+  <div
+    class="_chip_fe894d"
+  >
+    <span
+      class="_text_fe894d"
+    >
+      lorem
+    </span>
+  </div>
+</DocumentFragment>
+`;

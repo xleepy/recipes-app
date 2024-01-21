@@ -33,7 +33,9 @@ vi.mock('../../providers/recipes-api-provider', async (importOriginal) => {
   };
 });
 
-describe('Detail tests', () => {
+// skipped till issue will be resolved
+// https://github.com/vitest-dev/vitest/issues/5004
+describe.skip('Detail tests', () => {
   it('should render detail', async () => {
     const { asFragment, queryByTestId } = render(
       <AppProviders>

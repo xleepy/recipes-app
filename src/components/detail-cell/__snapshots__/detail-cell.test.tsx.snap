@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Detail cell tests > should render detail cell 1`] = `
+<DocumentFragment>
+  <div
+    class="flex-1 _detail-cell_eb6d6d  "
+  >
+    test
+  </div>
+</DocumentFragment>
+`;

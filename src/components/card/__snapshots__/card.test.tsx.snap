@@ -5,8 +5,11 @@ exports[`Card tests > should render card 1`] = `
   <div
     class="_card_c37972"
     data-testid="card"
+    role="button"
+    tabindex="0"
   >
     <img
+      alt="preview"
       class="_image_c37972"
       loading="lazy"
       src=""

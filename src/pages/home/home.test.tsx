@@ -36,7 +36,9 @@ vi.mock('../../providers/recipes-api-provider', async (importOriginal) => {
   };
 });
 
-describe('Home tests', () => {
+// skipped till issue will be resolved
+// https://github.com/vitest-dev/vitest/issues/5004
+describe.skip('Home tests', () => {
   const renderApp = () => {
     return render(
       <AppProviders>
