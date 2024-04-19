@@ -1,0 +1,18 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`App tests > should render app 1`] = `
+<DocumentFragment>
+  <div>
+    <input
+      class="_search_4d1a47"
+      data-testid="search"
+      placeholder="Enter query"
+      type="text"
+      value="pasta"
+    />
+    <p>
+      Loading...
+    </p>
+  </div>
+</DocumentFragment>
+`;

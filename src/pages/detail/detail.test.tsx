@@ -1,46 +1,73 @@
-import { render, waitFor } from '@testing-library/preact';
+import { render, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import Detail from '.';
+import DetailPage from '.';
+import { MemoryRouter } from 'react-router-dom';
+import { RecipesApiProvider } from '../../providers/recipes-api-provider';
 import { GetRecipeInformation200Response } from '../../api';
-import { AppProviders } from '../../providers/app-providers';
 
-const mockFn = vi.fn(() =>
-  Promise.resolve({
-    title: 'test',
-    summary: 'test',
-    instructions: 'test',
-    image: 'none',
-  } as GetRecipeInformation200Response)
-);
-
-vi.mock('react-router-dom', async (importOriginal) => {
-  const original = await importOriginal();
+vi.mock('../../api/apis/RecipesApi', () => {
+  const MockInstance = vi.fn(() => {
+    return {
+      getRecipeInformation: vi.fn(() => {
+        return Promise.resolve<GetRecipeInformation200Response>({
+          title: 'test',
+          imageType: 'png',
+          image: 'none',
+          id: 1,
+          servings: 1,
+          vegan: true,
+          whole30: false,
+          weightWatcherSmartPoints: 1,
+          veryPopular: false,
+          veryHealthy: true,
+          vegetarian: true,
+          sustainable: true,
+          summary: 'lorem ipsum',
+          spoonacularScore: 1,
+          spoonacularSourceUrl: 'test',
+          sourceUrl: 'test',
+          sourceName: 'test',
+          readyInMinutes: 15,
+          pricePerServing: 1,
+          occasions: [],
+          lowFodmap: false,
+          license: 'test',
+          ketogenic: false,
+          instructions: 'test',
+          healthScore: 12,
+          glutenFree: false,
+          gaps: 'test',
+          extendedIngredients: new Set(),
+          dishTypes: [],
+          diets: [],
+          dairyFree: false,
+          cuisines: [],
+          creditsText: 'test',
+          cheap: false,
+          analyzedInstructions: [{ steps: [] }],
+          aggregateLikes: 1,
+          winePairing: {
+            pairedWines: [],
+            pairingText: 'test',
+            productMatches: new Set(),
+          },
+        });
+      }),
+    };
+  });
   return {
-    ...(original as any),
-    useParams: () => ({ id: 'test' }),
+    RecipesApi: MockInstance,
   };
 });
 
-vi.mock('../../providers/recipes-api-provider', async (importOriginal) => {
-  const original = await importOriginal();
-  return {
-    ...(original as any),
-    useRecipesApi: vi.fn(() => {
-      return {
-        getRecipeInformation: mockFn,
-      };
-    }),
-  };
-});
-
-// skipped till issue will be resolved
-// https://github.com/vitest-dev/vitest/issues/5004
-describe.skip('Detail tests', () => {
+describe('Detail tests', () => {
   it('should render detail', async () => {
     const { asFragment, queryByTestId } = render(
-      <AppProviders>
-        <Detail />
-      </AppProviders>
+      <MemoryRouter>
+        <RecipesApiProvider>
+          <DetailPage />
+        </RecipesApiProvider>
+      </MemoryRouter>
     );
 
     await waitFor(() => {

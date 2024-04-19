@@ -1,11 +1,13 @@
 import { useRecipesApi } from '../../providers/recipes-api-provider';
 import styles from './detail.module.css';
 import { useParams } from 'react-router-dom';
-import { useSuspenseQuery } from '@tanstack/react-query';
 import { Chip } from '../../components/chip';
 import DOMPurify from 'dompurify';
 import { DetailCell } from '../../components/detail-cell';
 import { List } from '../../components/list';
+import { GetRecipeInformation200Response } from '../../api';
+import { Suspense, use } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 
 type Item = {
   id: number;
@@ -26,21 +28,11 @@ type AnalyzedInstruction = {
   steps: Step[];
 };
 
-const Detail = () => {
-  const { id } = useParams<{ id: string }>();
-  const api = useRecipesApi();
-  const { data: detail, error } = useSuspenseQuery({
-    queryKey: [id],
-    queryFn: ({ queryKey, signal }) => {
-      const [key] = queryKey;
-      return api.getRecipeInformation({ id: Number(key) }, { signal });
-    },
-  });
+type DetailProps = {
+  detailPromise: Promise<GetRecipeInformation200Response>;
+};
 
-  if (!detail) {
-    return <p>{error}</p>;
-  }
-
+const Detail = ({ detailPromise }: DetailProps) => {
   const {
     title,
     dishTypes,
@@ -49,9 +41,10 @@ const Detail = () => {
     summary,
     analyzedInstructions = [],
     extendedIngredients,
-  } = detail;
+    image,
+  } = use(detailPromise);
 
-  const [{ steps }] = analyzedInstructions as AnalyzedInstruction[];
+  const [{ steps = [] }] = analyzedInstructions as AnalyzedInstruction[];
 
   const ingredients = Array.from(extendedIngredients);
 
@@ -61,7 +54,7 @@ const Detail = () => {
       className={`gap-l flex flex-wrap flex-justify-center`}
     >
       <DetailCell>
-        <img className={styles.image} src={detail.image} alt="recipe" />
+        <img className={styles.image} src={image} alt="recipe" />
       </DetailCell>
       <DetailCell className="flex flex-column gap-s">
         <h2>{title}</h2>
@@ -85,7 +78,17 @@ const Detail = () => {
             return (
               <li
                 key={`${ingredient.id}-${idx}`}
-              >{`${ingredient.original}`}</li>
+                className={`flex gap-s ${styles.ingredient} flex-align-center`}
+              >
+                <img
+                  height={30}
+                  width={30}
+                  alt="ingredient"
+                  className={styles.ingredientImage}
+                  src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}
+                />
+                <span>{`${ingredient.original}`} </span>
+              </li>
             );
           })}
         </List>
@@ -101,4 +104,19 @@ const Detail = () => {
   );
 };
 
-export default Detail;
+const DetailPage = () => {
+  const { id } = useParams<{ id: string }>();
+  const api = useRecipesApi();
+
+  const promise = api.getRecipeInformation({ id: Number(id) });
+
+  return (
+    <ErrorBoundary resetKeys={[id]} fallback={<p>Failed to fetch...</p>}>
+      <Suspense fallback={<p>Loading...</p>}>
+        <Detail detailPromise={promise} />
+      </Suspense>
+    </ErrorBoundary>
+  );
+};
+
+export default DetailPage;

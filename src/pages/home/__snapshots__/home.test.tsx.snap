@@ -4,20 +4,24 @@ exports[`Home tests > should render home 1`] = `
 <DocumentFragment>
   <div>
     <input
-      class="_search_892a02"
+      class="_search_4d1a47"
       data-testid="search"
       placeholder="Enter query"
       type="text"
+      value="pasta"
     />
     <ul
       class="_card-container_13d6a5"
     >
       <div
-        class="_card_a4e602"
+        class="_card_c37972"
         data-testid="card"
+        role="button"
+        tabindex="0"
       >
         <img
-          class="_image_a4e602"
+          alt="preview"
+          class="_image_c37972"
           loading="lazy"
           src="none"
         />

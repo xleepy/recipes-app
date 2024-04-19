@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/preact';
+import { renderHook } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { useDebounceCallback } from './hooks';
 

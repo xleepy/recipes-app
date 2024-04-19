@@ -3,17 +3,73 @@
 exports[`Detail tests > should render detail 1`] = `
 <DocumentFragment>
   <div
-    class="_detail_21518f"
+    class="gap-l flex flex-wrap flex-justify-center"
     data-testid="detail"
   >
-    <img
-      src="none"
-    />
-    <div>
-      test
+    <div
+      class="flex-1 _detail-cell_eb6d6d  "
+    >
+      <img
+        alt="recipe"
+        class="_image_21518f"
+        src="none"
+      />
     </div>
-    <div>
-      test
+    <div
+      class="flex-1 _detail-cell_eb6d6d flex flex-column gap-s "
+    >
+      <h2>
+        test
+      </h2>
+      <div
+        class="flex flex-wrap flex-justify-center gap-s"
+      >
+        <div
+          class="_chip_fe894d"
+        >
+          <span
+            class="_text_fe894d"
+          >
+            vegetarian
+          </span>
+        </div>
+      </div>
+      <div
+        class="flex flex-wrap"
+      >
+        <p>
+          Health score: 12
+        </p>
+      </div>
+      <p
+        class="text-left"
+      >
+        lorem ipsum
+      </p>
+    </div>
+    <div
+      class="flex-1 _detail-cell_eb6d6d text-left "
+    >
+      <div
+        class="text-left "
+      >
+        <h3>
+          Ingredients
+        </h3>
+        <ul />
+      </div>
+    </div>
+    <div
+      class="flex-1 _detail-cell_eb6d6d  "
+    >
+      <div
+        class="text-left "
+      >
+        <h3>
+          Steps
+        </h3>
+        <ol />
+      </div>
     </div>
   </div>
 </DocumentFragment>

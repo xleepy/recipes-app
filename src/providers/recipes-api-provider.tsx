@@ -1,17 +1,12 @@
-import { createContext, ComponentChildren } from 'preact';
+import { createContext, ReactNode, useMemo, useContext } from 'react';
 import { RecipesApi } from '../api/apis/RecipesApi';
 import { Configuration } from '../api/runtime';
-import { useContext, useMemo } from 'preact/hooks';
 
 type RecipesProviderContextValue = RecipesApi | null;
 
 const RecipesProviderContext = createContext<RecipesProviderContextValue>(null);
 
-export const RecipesApiProvider = ({
-  children,
-}: {
-  children: ComponentChildren;
-}) => {
+export const RecipesApiProvider = ({ children }: { children: ReactNode }) => {
   const api = useMemo(() => {
     return new RecipesApi(
       new Configuration({ apiKey: import.meta.env.VITE_APP_ID })

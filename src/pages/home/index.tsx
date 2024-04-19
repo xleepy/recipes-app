@@ -1,12 +1,29 @@
-import { useState } from 'preact/hooks';
+import { Suspense, useState } from 'react';
 import { Search } from '../../components/search/search';
 import styles from './home.module.css';
 import { Card } from '../../components/card/card';
 import { useRecipesApi } from '../../providers/recipes-api-provider';
 import { useDebounceCallback } from '../../hooks';
-import { useQuery } from '@tanstack/react-query';
+import { SearchRecipes200ResponseResultsInner } from '../../api';
+import { use } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 
 const SEARCH_KEY = 'cached-search-key';
+
+type ListProps = {
+  recipesPromise: Promise<SearchRecipes200ResponseResultsInner[]>;
+};
+
+const List = ({ recipesPromise }: ListProps) => {
+  const data = use(recipesPromise);
+  return (
+    <ul className={styles.cardContainer}>
+      {data.map(({ id, image, title }) => {
+        return <Card key={id} id={id} image={image} title={title} />;
+      })}
+    </ul>
+  );
+};
 
 export const Home = () => {
   const [search, setSearch] = useState<string>(() => {
@@ -14,15 +31,6 @@ export const Home = () => {
   });
 
   const api = useRecipesApi();
-  const { data } = useQuery({
-    queryKey: [search],
-    queryFn: ({ queryKey }) => {
-      const [key] = queryKey;
-      return api
-        .searchRecipes({ query: key, number: 100, instructionsRequired: true })
-        .then(({ results }) => Array.from(results));
-    },
-  });
 
   const queryChange = useDebounceCallback(
     (event: Event) => {
@@ -36,15 +44,18 @@ export const Home = () => {
     []
   );
 
+  const promise = api
+    .searchRecipes({ query: search, number: 100, instructionsRequired: true })
+    .then(({ results }) => Array.from(results));
+
   return (
     <div>
       <Search value={search} onValueChange={queryChange} />
-      <ul className={styles.cardContainer}>
-        {data &&
-          data.map(({ id, image, title }) => {
-            return <Card key={id} id={id} image={image} title={title} />;
-          })}
-      </ul>
+      <ErrorBoundary resetKeys={[search]} fallback={<p>Failed to fetch</p>}>
+        <Suspense fallback={<p>Loading...</p>}>
+          <List recipesPromise={promise} />
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 };

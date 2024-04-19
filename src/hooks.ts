@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useRef } from 'preact/hooks';
+import { useCallback, useEffect, useRef } from 'react';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export function useSyncRef<T>(value: T) {
   const ref = useRef(value);
   useEffect(() => {
@@ -21,6 +22,7 @@ export function useDebounceCallback<T extends (...args: any) => void>(
         clearTimeout(timeoutRef.current);
       }
       timeoutRef.current = window.setTimeout(() => {
+        console.log('args', args);
         callbackRef.current(...args);
       }, delay);
     },

@@ -1,26 +1,15 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ComponentChildren } from 'preact';
 import { RecipesApiProvider } from './recipes-api-provider';
 import { HashRouter } from 'react-router-dom';
+import { ReactNode } from 'react';
 
 type AppProvidersProps = {
-  children: ComponentChildren;
+  children: ReactNode;
 };
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 0,
-    },
-  },
-});
 
 export const AppProviders = ({ children }: AppProvidersProps) => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RecipesApiProvider>
-        <HashRouter>{children}</HashRouter>
-      </RecipesApiProvider>
-    </QueryClientProvider>
+    <RecipesApiProvider>
+      <HashRouter>{children}</HashRouter>
+    </RecipesApiProvider>
   );
 };

@@ -1,9 +1,10 @@
-import { h, render } from 'preact';
-import { App } from './app';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import './index.css';
+import { App } from './app';
 
-if (import.meta.env.DEV) {
-  import('preact/debug');
-}
-
-render(<App />, document.getElementById('app') as HTMLElement);
+ReactDOM.createRoot(document.getElementById('app')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);

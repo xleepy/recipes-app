@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { Home } from './pages/home';
-import { Suspense, lazy } from 'preact/compat';
 import { AppProviders } from './providers/app-providers';
+import { lazy } from 'react';
 
 const Detail = lazy(() => import('./pages/detail'));
 
@@ -10,14 +10,7 @@ export function App() {
     <AppProviders>
       <Routes>
         <Route element={<Home />} index />
-        <Route
-          path="/detail/:id"
-          element={
-            <Suspense fallback={<p>Loading...</p>}>
-              <Detail />
-            </Suspense>
-          }
-        />
+        <Route path="/detail/:id" element={<Detail />} />
       </Routes>
     </AppProviders>
   );

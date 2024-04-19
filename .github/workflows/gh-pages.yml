@@ -27,7 +27,7 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm run generate-api
-      - run: npm run test
+      - run: npm run coverage
       - run: npm run build:gh
         env:
           VITE_APP_ID: ${{ secrets.VITE_APP_ID }}
