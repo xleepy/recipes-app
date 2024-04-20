@@ -1,0 +1,18 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Fallback tests > should render fallback with error 1`] = `
+<DocumentFragment>
+  <div
+    role="alert"
+  >
+    <p>
+      Something went wrong:
+    </p>
+    <pre
+      style="color: red;"
+    >
+      test
+    </pre>
+  </div>
+</DocumentFragment>
+`;

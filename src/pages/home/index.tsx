@@ -7,6 +7,7 @@ import { useDebounceCallback } from '../../hooks';
 import { SearchRecipes200ResponseResultsInner } from '../../api';
 import { use } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
+import { Fallback } from '../../components/fallback';
 
 const SEARCH_KEY = 'cached-search-key';
 
@@ -51,7 +52,7 @@ export const Home = () => {
   return (
     <div>
       <Search value={search} onValueChange={queryChange} />
-      <ErrorBoundary resetKeys={[search]} fallback={<p>Failed to fetch</p>}>
+      <ErrorBoundary resetKeys={[search]} FallbackComponent={Fallback}>
         <Suspense fallback={<p>Loading...</p>}>
           <List recipesPromise={promise} />
         </Suspense>

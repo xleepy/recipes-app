@@ -8,6 +8,7 @@ import { List } from '../../components/list';
 import { GetRecipeInformation200Response } from '../../api';
 import { Suspense, use } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
+import { Fallback } from '../../components/fallback';
 
 type Item = {
   id: number;
@@ -111,7 +112,7 @@ const DetailPage = () => {
   const promise = api.getRecipeInformation({ id: Number(id) });
 
   return (
-    <ErrorBoundary resetKeys={[id]} fallback={<p>Failed to fetch...</p>}>
+    <ErrorBoundary FallbackComponent={Fallback} resetKeys={[id]}>
       <Suspense fallback={<p>Loading...</p>}>
         <Detail detailPromise={promise} />
       </Suspense>
