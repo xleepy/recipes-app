@@ -1,8 +1,8 @@
-import { ComponentChildren } from 'preact';
+import type { ReactNode } from 'react';
 
 type ListProps = {
   title?: string;
-  children: ComponentChildren;
+  children: ReactNode;
   as?: 'ul' | 'ol';
   className?: string;
   listClassName?: string;

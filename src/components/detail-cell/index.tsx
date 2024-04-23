@@ -1,8 +1,8 @@
-import { ComponentChildren } from 'preact';
+import type { ReactNode } from 'react';
 import styles from './detail-cell.module.css';
 
 type DetailCellProps = {
-  children: ComponentChildren;
+  children: ReactNode;
   className?: string;
 };
 
