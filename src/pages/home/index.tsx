@@ -3,7 +3,7 @@ import { Search } from '../../components/search/search';
 import styles from './home.module.css';
 import { Card } from '../../components/card/card';
 import { useRecipesApi } from '../../providers/recipes-api-provider';
-import { useDebounceCallback } from '../../hooks';
+import { useDebounce } from '../../hooks';
 import { SearchRecipes200ResponseResultsInner } from '../../api';
 import { use } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -33,17 +33,13 @@ export const Home = () => {
 
   const api = useRecipesApi();
 
-  const queryChange = useDebounceCallback(
-    (event: Event) => {
-      const value = (event.target as HTMLInputElement).value.trim();
-      if (value.length) {
-        setSearch(value);
-        sessionStorage.setItem(SEARCH_KEY, value);
-      }
-    },
-    500,
-    []
-  );
+  const queryChange = useDebounce((event: Event) => {
+    const value = (event.target as HTMLInputElement).value.trim();
+    if (value.length) {
+      setSearch(value);
+      sessionStorage.setItem(SEARCH_KEY, value);
+    }
+  }, 500);
 
   const promise = api
     .searchRecipes({ query: search, number: 100, instructionsRequired: true })
