@@ -3,6 +3,7 @@ module.exports = {
   env: {
     browser: true,
   },
+  plugins: ['eslint-plugin-react-compiler'],
   extends: [
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
@@ -18,6 +19,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'react-compiler/react-compiler': 'error',
     'react/no-unknown-property': ['error', { ignore: ['class'] }],
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/no-explicit-any': 'warn',
